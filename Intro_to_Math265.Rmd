@@ -1,6 +1,6 @@
 ---
 title: "Introduction to Data Science"
-subtitle: "MATH 265 Section 1"
+subtitle: "MATH 265"
 author: "Eric Nordmoe"
 date: "Winter 2023"
 output:
