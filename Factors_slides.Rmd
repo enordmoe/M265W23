@@ -1,6 +1,6 @@
 ---
 title: "Chapter 15 Factors"
-subtitle: "MATH 295"
+subtitle: "MATH 265"
 author: "Eric Nordmoe"
 output:
   xaringan::moon_reader:
@@ -225,7 +225,7 @@ ggplot(ks_data, aes(x = fct_rev(fct_infreq(Country)))) +
 
 
 ```{r, fig.height = 5}
-ks_data2 <- ks_data %>% filter(!is.na(Country))
+ks_data2 <- ks_data %>% drop_na(Country)
 ggplot(ks_data2, aes(x = fct_rev(fct_infreq(Country)))) +
   geom_bar() + 
   coord_flip()

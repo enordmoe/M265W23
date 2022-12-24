@@ -4,6 +4,7 @@
     <title>Chapters 18 and 19: Pipes and Functions</title>
     <meta charset="utf-8" />
     <meta name="author" content="Eric Nordmoe" />
+    <script src="libs/header-attrs-2.14/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
     <link rel="stylesheet" href="scrollingbox.css" type="text/css" />
   </head>
@@ -11,9 +12,15 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
+.title[
 # Chapters 18 and 19: Pipes and Functions
-## MATH 295
+]
+.subtitle[
+## MATH 265
+]
+.author[
 ### Eric Nordmoe
+]
 
 ---
 
@@ -374,7 +381,7 @@ scrape_episode(wanda)
 ```
 
 ```
-## [1] 9
+## numeric(0)
 ```
 
 ---
@@ -388,7 +395,7 @@ scrape_episode(wanda)
 ```
 
 ```
-## [1] 9
+## numeric(0)
 ```
 
 &lt;img src="figures/episode_sinner.png" width="1773" height="10%" style="display: block; margin: auto;" /&gt;
@@ -399,7 +406,7 @@ scrape_episode(sinner)
 ```
 
 ```
-## [1] 25
+## numeric(0)
 ```
 
 ---
@@ -413,7 +420,7 @@ scrape_episode(behind)
 ```
 
 ```
-## [1] 6
+## numeric(0)
 ```
 
 ---
@@ -465,10 +472,10 @@ scrape_show_info(wanda)
 ```
 
 ```
-## # A tibble: 1 x 3
-##   title       runtime genres                                
-##   &lt;chr&gt;       &lt;chr&gt;   &lt;chr&gt;                                 
-## 1 WandaVision &lt;NA&gt;    Action, Comedy, Drama, Fantasy, Sci-Fi
+## # A tibble: 1 × 3
+##   title runtime genres
+##   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; 
+## 1 &lt;NA&gt;  &lt;NA&gt;    ""
 ```
 
 ```r
@@ -476,10 +483,10 @@ scrape_show_info(sinner)
 ```
 
 ```
-## # A tibble: 1 x 3
-##   title      runtime genres                         
-##   &lt;chr&gt;      &lt;chr&gt;   &lt;chr&gt;                          
-## 1 The Sinner 45      Crime, Drama, Mystery, Thriller
+## # A tibble: 1 × 3
+##   title runtime genres
+##   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; 
+## 1 &lt;NA&gt;  &lt;NA&gt;    ""
 ```
 
 ```r
@@ -487,10 +494,10 @@ scrape_show_info(behind)
 ```
 
 ```
-## # A tibble: 1 x 3
-##   title           runtime genres                  
-##   &lt;chr&gt;           &lt;chr&gt;   &lt;chr&gt;                   
-## 1 Behind Her Eyes 298     Drama, Mystery, Thriller
+## # A tibble: 1 × 3
+##   title runtime genres
+##   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; 
+## 1 &lt;NA&gt;  &lt;NA&gt;    ""
 ```
 
 ---
@@ -582,10 +589,10 @@ scrape_show_info(wanda_url)
 ```
 
 ```
-## # A tibble: 1 x 3
-##   title       runtime genres                                
-##   &lt;chr&gt;       &lt;chr&gt;   &lt;chr&gt;                                 
-## 1 WandaVision &lt;NA&gt;    Action, Comedy, Drama, Fantasy, Sci-Fi
+## # A tibble: 1 × 3
+##   title runtime genres
+##   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; 
+## 1 &lt;NA&gt;  &lt;NA&gt;    ""
 ```
 
 ```r
@@ -593,10 +600,10 @@ scrape_show_info(sinner_url)
 ```
 
 ```
-## # A tibble: 1 x 3
-##   title      runtime genres                         
-##   &lt;chr&gt;      &lt;chr&gt;   &lt;chr&gt;                          
-## 1 The Sinner 45      Crime, Drama, Mystery, Thriller
+## # A tibble: 1 × 3
+##   title runtime genres
+##   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; 
+## 1 &lt;NA&gt;  &lt;NA&gt;    ""
 ```
 
 ```r
@@ -604,10 +611,10 @@ scrape_show_info(behind_url)
 ```
 
 ```
-## # A tibble: 1 x 3
-##   title           runtime genres                  
-##   &lt;chr&gt;           &lt;chr&gt;   &lt;chr&gt;                   
-## 1 Behind Her Eyes 298     Drama, Mystery, Thriller
+## # A tibble: 1 × 3
+##   title runtime genres
+##   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; 
+## 1 &lt;NA&gt;  &lt;NA&gt;    ""
 ```
 
 ---
@@ -635,9 +642,12 @@ head(urls)
 ```
 
 ```
-## [1] "http://www.imdb.com/title/tt9140560" "http://www.imdb.com/title/tt6048596"
-## [3] "http://www.imdb.com/title/tt9698442" "http://www.imdb.com/title/tt9012876"
-## [5] "http://www.imdb.com/title/tt2560140" "http://www.imdb.com/title/tt7440726"
+## [1] "http://www.imdb.com/title/tt13443470"
+## [2] "http://www.imdb.com/title/tt13406094"
+## [3] "http://www.imdb.com/title/tt4236770" 
+## [4] "http://www.imdb.com/title/tt10278918"
+## [5] "http://www.imdb.com/title/tt9319668" 
+## [6] "http://www.imdb.com/title/tt16358384"
 ```
 ]
 
@@ -655,10 +665,10 @@ scrape_show_info(urls[1])
 ```
 
 ```
-## # A tibble: 1 x 3
-##   title       runtime genres                                
-##   &lt;chr&gt;       &lt;chr&gt;   &lt;chr&gt;                                 
-## 1 WandaVision &lt;NA&gt;    Action, Comedy, Drama, Fantasy, Sci-Fi
+## # A tibble: 1 × 3
+##   title runtime genres
+##   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; 
+## 1 &lt;NA&gt;  &lt;NA&gt;    ""
 ```
 
 ```r
@@ -666,10 +676,10 @@ scrape_show_info(urls[2])
 ```
 
 ```
-## # A tibble: 1 x 3
-##   title      runtime genres                         
-##   &lt;chr&gt;      &lt;chr&gt;   &lt;chr&gt;                          
-## 1 The Sinner 45      Crime, Drama, Mystery, Thriller
+## # A tibble: 1 × 3
+##   title runtime genres
+##   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; 
+## 1 &lt;NA&gt;  &lt;NA&gt;    ""
 ```
 
 ```r
@@ -677,10 +687,10 @@ scrape_show_info(urls[3])
 ```
 
 ```
-## # A tibble: 1 x 3
-##   title           runtime genres                  
-##   &lt;chr&gt;           &lt;chr&gt;   &lt;chr&gt;                   
-## 1 Behind Her Eyes 298     Drama, Mystery, Thriller
+## # A tibble: 1 × 3
+##   title runtime genres
+##   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; 
+## 1 &lt;NA&gt;  &lt;NA&gt;    ""
 ```
 ]
 
@@ -738,7 +748,9 @@ scrape_show_info &lt;- function(x){
 ---
 # Acknowledgement  
 
-Web scraping introduction to functions adapted from materials provided by [Data Science in a Box](https://datasciencebox.org/) at https://github.com/rstudio-education/datascience-box.
+Web scraping introduction to functions adapted from materials provided by [Data Science in a Box](https://datasciencebox.org/) at https://github.com/rstudio-education/datascience-box. 
+
+
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
@@ -787,6 +799,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable

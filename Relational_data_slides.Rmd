@@ -1,6 +1,6 @@
 ---
 title: "Chapter 13 Relational Data"
-subtitle: "MATH 295"
+subtitle: "MATH 265"
 author: "Eric Nordmoe"
 output:
   xaringan::moon_reader:

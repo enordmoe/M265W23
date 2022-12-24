@@ -1,6 +1,6 @@
 ---
 title: "Chapter 11 Data Import"
-subtitle: "MATH 295"
+subtitle: "MATH 265"
 author: "Eric Nordmoe"
 output:
   xaringan::moon_reader:

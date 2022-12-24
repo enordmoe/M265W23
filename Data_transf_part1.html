@@ -4,15 +4,22 @@
     <title>Data Transformation Part I</title>
     <meta charset="utf-8" />
     <meta name="author" content="Eric Nordmoe" />
+    <script src="libs/header-attrs-2.14/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
+.title[
 # Data Transformation Part I
-## MATH 295
+]
+.subtitle[
+## MATH 265
+]
+.author[
 ### Eric Nordmoe
+]
 
 ---
 
@@ -64,19 +71,19 @@ mpg
 ```
 
 ```
-## # A tibble: 234 x 11
-##    manufacturer model      displ  year   cyl trans      drv     cty   hwy fl    class  
-##    &lt;chr&gt;        &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;      &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;  
-##  1 audi         a4           1.8  1999     4 auto(l5)   f        18    29 p     compact
-##  2 audi         a4           1.8  1999     4 manual(m5) f        21    29 p     compact
-##  3 audi         a4           2    2008     4 manual(m6) f        20    31 p     compact
-##  4 audi         a4           2    2008     4 auto(av)   f        21    30 p     compact
-##  5 audi         a4           2.8  1999     6 auto(l5)   f        16    26 p     compact
-##  6 audi         a4           2.8  1999     6 manual(m5) f        18    26 p     compact
-##  7 audi         a4           3.1  2008     6 auto(av)   f        18    27 p     compact
-##  8 audi         a4 quattro   1.8  1999     4 manual(m5) 4        18    26 p     compact
-##  9 audi         a4 quattro   1.8  1999     4 auto(l5)   4        16    25 p     compact
-## 10 audi         a4 quattro   2    2008     4 manual(m6) 4        20    28 p     compact
+## # A tibble: 234 × 11
+##    manufacturer model      displ  year   cyl trans drv     cty   hwy fl    class
+##    &lt;chr&gt;        &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
+##  1 audi         a4           1.8  1999     4 auto… f        18    29 p     comp…
+##  2 audi         a4           1.8  1999     4 manu… f        21    29 p     comp…
+##  3 audi         a4           2    2008     4 manu… f        20    31 p     comp…
+##  4 audi         a4           2    2008     4 auto… f        21    30 p     comp…
+##  5 audi         a4           2.8  1999     6 auto… f        16    26 p     comp…
+##  6 audi         a4           2.8  1999     6 manu… f        18    26 p     comp…
+##  7 audi         a4           3.1  2008     6 auto… f        18    27 p     comp…
+##  8 audi         a4 quattro   1.8  1999     4 manu… 4        18    26 p     comp…
+##  9 audi         a4 quattro   1.8  1999     4 auto… 4        16    25 p     comp…
+## 10 audi         a4 quattro   2    2008     4 manu… 4        20    28 p     comp…
 ## # … with 224 more rows
 ```
 
@@ -90,20 +97,21 @@ flights
 ```
 
 ```
-## # A tibble: 336,776 x 19
-##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time arr_delay carrier flight
-##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;    &lt;int&gt;
-##  1  2013     1     1      517            515         2      830            819        11 UA        1545
-##  2  2013     1     1      533            529         4      850            830        20 UA        1714
-##  3  2013     1     1      542            540         2      923            850        33 AA        1141
-##  4  2013     1     1      544            545        -1     1004           1022       -18 B6         725
-##  5  2013     1     1      554            600        -6      812            837       -25 DL         461
-##  6  2013     1     1      554            558        -4      740            728        12 UA        1696
-##  7  2013     1     1      555            600        -5      913            854        19 B6         507
-##  8  2013     1     1      557            600        -3      709            723       -14 EV        5708
-##  9  2013     1     1      557            600        -3      838            846        -8 B6          79
-## 10  2013     1     1      558            600        -2      753            745         8 AA         301
-## # … with 336,766 more rows, and 8 more variables: tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;,
+## # A tibble: 336,776 × 19
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+##  1  2013     1     1      517            515         2      830            819
+##  2  2013     1     1      533            529         4      850            830
+##  3  2013     1     1      542            540         2      923            850
+##  4  2013     1     1      544            545        -1     1004           1022
+##  5  2013     1     1      554            600        -6      812            837
+##  6  2013     1     1      554            558        -4      740            728
+##  7  2013     1     1      555            600        -5      913            854
+##  8  2013     1     1      557            600        -3      709            723
+##  9  2013     1     1      557            600        -3      838            846
+## 10  2013     1     1      558            600        -2      753            745
+## # … with 336,766 more rows, and 11 more variables: arr_delay &lt;dbl&gt;,
+## #   carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;,
 ## #   air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;
 ```
 
@@ -117,7 +125,7 @@ heroes
 ```
 
 ```
-## # A tibble: 599 x 7
+## # A tibble: 599 × 7
 ##    name          gender hair_color height publisher     alignment weight
 ##    &lt;chr&gt;         &lt;fct&gt;  &lt;fct&gt;       &lt;dbl&gt; &lt;fct&gt;         &lt;fct&gt;      &lt;dbl&gt;
 ##  1 A-Bomb        Male   No Hair       203 Marvel Comics good         441
@@ -128,7 +136,7 @@ heroes
 ##  6 Adam Strange  Male   Blond         185 DC Comics     good          88
 ##  7 Agent 13      Female Blond         173 Marvel Comics good          61
 ##  8 Agent Bob     Male   Brown         178 Marvel Comics good          81
-##  9 Agent Zero    Male   &lt;NA&gt;          191 Marvel Comics good         104
+##  9 Agent Zero    Male   NA            191 Marvel Comics good         104
 ## 10 Air-Walker    Male   White         188 Marvel Comics bad          108
 ## # … with 589 more rows
 ```
@@ -292,6 +300,15 @@ For selecting specific variables or groups of variables with similar names or di
 &lt;img src="figures/summarise.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 .footnote[Source: Data Transformation with `dplyr`: CHEAT SHEET]
+
+
+
+
+
+
+
+
+
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
@@ -340,6 +357,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable

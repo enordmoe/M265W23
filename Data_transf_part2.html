@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Data Visualisation Part II</title>
+    <title>Data Transformation Part II</title>
     <meta charset="utf-8" />
     <meta name="author" content="Eric Nordmoe" />
+    <script src="libs/header-attrs-2.14/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
     <link rel="stylesheet" href="scrollingbox.css" type="text/css" />
   </head>
@@ -11,10 +12,15 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# Data Visualisation Part II
-## MATH 295
+.title[
+# Data Transformation Part II
+]
+.subtitle[
+## MATH 265
+]
+.author[
 ### Eric Nordmoe
-### Winter 2021
+]
 
 ---
 
@@ -141,19 +147,19 @@ vehicles
 ```
 
 ```
-## # A tibble: 33,442 x 12
-##       id make  model       year class         trans        drive            cyl displ fuel     hwy   cty
-##    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;        &lt;chr&gt;          &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;
-##  1 13309 Acura 2.2CL/3.0…  1997 Subcompact C… Automatic 4… Front-Wheel D…     4   2.2 Regul…    26    20
-##  2 13310 Acura 2.2CL/3.0…  1997 Subcompact C… Manual 5-spd Front-Wheel D…     4   2.2 Regul…    28    22
-##  3 13311 Acura 2.2CL/3.0…  1997 Subcompact C… Automatic 4… Front-Wheel D…     6   3   Regul…    26    18
-##  4 14038 Acura 2.3CL/3.0…  1998 Subcompact C… Automatic 4… Front-Wheel D…     4   2.3 Regul…    27    19
-##  5 14039 Acura 2.3CL/3.0…  1998 Subcompact C… Manual 5-spd Front-Wheel D…     4   2.3 Regul…    29    21
-##  6 14040 Acura 2.3CL/3.0…  1998 Subcompact C… Automatic 4… Front-Wheel D…     6   3   Regul…    26    17
-##  7 14834 Acura 2.3CL/3.0…  1999 Subcompact C… Automatic 4… Front-Wheel D…     4   2.3 Regul…    27    20
-##  8 14835 Acura 2.3CL/3.0…  1999 Subcompact C… Manual 5-spd Front-Wheel D…     4   2.3 Regul…    29    21
-##  9 14836 Acura 2.3CL/3.0…  1999 Subcompact C… Automatic 4… Front-Wheel D…     6   3   Regul…    26    17
-## 10 11789 Acura 2.5TL       1995 Compact Cars  Automatic 4… Front-Wheel D…     5   2.5 Premi…    23    18
+## # A tibble: 33,442 × 12
+##       id make  model        year class trans drive   cyl displ fuel    hwy   cty
+##    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1 13309 Acura 2.2CL/3.0CL  1997 Subc… Auto… Fron…     4   2.2 Regu…    26    20
+##  2 13310 Acura 2.2CL/3.0CL  1997 Subc… Manu… Fron…     4   2.2 Regu…    28    22
+##  3 13311 Acura 2.2CL/3.0CL  1997 Subc… Auto… Fron…     6   3   Regu…    26    18
+##  4 14038 Acura 2.3CL/3.0CL  1998 Subc… Auto… Fron…     4   2.3 Regu…    27    19
+##  5 14039 Acura 2.3CL/3.0CL  1998 Subc… Manu… Fron…     4   2.3 Regu…    29    21
+##  6 14040 Acura 2.3CL/3.0CL  1998 Subc… Auto… Fron…     6   3   Regu…    26    17
+##  7 14834 Acura 2.3CL/3.0CL  1999 Subc… Auto… Fron…     4   2.3 Regu…    27    20
+##  8 14835 Acura 2.3CL/3.0CL  1999 Subc… Manu… Fron…     4   2.3 Regu…    29    21
+##  9 14836 Acura 2.3CL/3.0CL  1999 Subc… Auto… Fron…     6   3   Regu…    26    17
+## 10 11789 Acura 2.5TL        1995 Comp… Auto… Fron…     5   2.5 Prem…    23    18
 ## # … with 33,432 more rows
 ```
 
@@ -178,14 +184,14 @@ filter(vehicles, make == "Ford", model == "Mustang", year == 2013)
 ```
 
 ```
-## # A tibble: 5 x 12
-##      id make  model    year class          trans          drive             cyl displ fuel     hwy   cty
-##   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;          &lt;chr&gt;          &lt;chr&gt;           &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;
-## 1 32244 Ford  Mustang  2013 Subcompact Ca… Automatic 6-s… Rear-Wheel Dri…     6   3.7 Regul…    31    19
-## 2 32245 Ford  Mustang  2013 Subcompact Ca… Manual 6-spd   Rear-Wheel Dri…     6   3.7 Regul…    29    19
-## 3 32246 Ford  Mustang  2013 Subcompact Ca… Automatic 6-s… Rear-Wheel Dri…     8   5   Regul…    25    18
-## 4 32247 Ford  Mustang  2013 Subcompact Ca… Manual 6-spd   Rear-Wheel Dri…     8   5   Regul…    26    15
-## 5 32391 Ford  Mustang  2013 Subcompact Ca… Manual 6-spd   Rear-Wheel Dri…     8   5.8 Premi…    24    15
+## # A tibble: 5 × 12
+##      id make  model    year class      trans drive   cyl displ fuel    hwy   cty
+##   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 32244 Ford  Mustang  2013 Subcompac… Auto… Rear…     6   3.7 Regu…    31    19
+## 2 32245 Ford  Mustang  2013 Subcompac… Manu… Rear…     6   3.7 Regu…    29    19
+## 3 32246 Ford  Mustang  2013 Subcompac… Auto… Rear…     8   5   Regu…    25    18
+## 4 32247 Ford  Mustang  2013 Subcompac… Manu… Rear…     8   5   Regu…    26    15
+## 5 32391 Ford  Mustang  2013 Subcompac… Manu… Rear…     8   5.8 Prem…    24    15
 ```
 
 
@@ -204,7 +210,7 @@ vehicles %&gt;%
 ```
 
 ```
-## # A tibble: 5 x 3
+## # A tibble: 5 × 3
 ##   trans             cty   hwy
 ##   &lt;chr&gt;           &lt;dbl&gt; &lt;dbl&gt;
 ## 1 Automatic 6-spd    19    31
@@ -229,7 +235,7 @@ vehicles %&gt;%
 ```
 
 ```
-## # A tibble: 3,264 x 2
+## # A tibble: 3,264 × 2
 ##    make  model      
 ##    &lt;chr&gt; &lt;chr&gt;      
 ##  1 Acura 2.2CL/3.0CL
@@ -268,7 +274,7 @@ vehicles %&gt;%
 ```
 
 ```
-## # A tibble: 1 x 2
+## # A tibble: 1 × 2
 ##   mean_cty med_cty
 ##      &lt;dbl&gt;   &lt;dbl&gt;
 ## 1     17.5      17
@@ -304,7 +310,7 @@ vehicles %&gt;%
 ```
 
 ```
-## # A tibble: 128 x 3
+## # A tibble: 128 × 3
 ##    make                        med_cty ncases
 ##    &lt;chr&gt;                         &lt;dbl&gt;  &lt;int&gt;
 ##  1 Acura                          18      269
@@ -335,20 +341,20 @@ vehicles %&gt;%
 ```
 
 ```
-## # A tibble: 33,442 x 12
+## # A tibble: 33,442 × 12
 ## # Groups:   make [128]
-##       id make  model       year class         trans        drive            cyl displ fuel     hwy   cty
-##    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;        &lt;chr&gt;          &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;
-##  1 13309 Acura 2.2CL/3.0…  1997 Subcompact C… Automatic 4… Front-Wheel D…     4   2.2 Regul…    26    20
-##  2 13310 Acura 2.2CL/3.0…  1997 Subcompact C… Manual 5-spd Front-Wheel D…     4   2.2 Regul…    28    22
-##  3 13311 Acura 2.2CL/3.0…  1997 Subcompact C… Automatic 4… Front-Wheel D…     6   3   Regul…    26    18
-##  4 14038 Acura 2.3CL/3.0…  1998 Subcompact C… Automatic 4… Front-Wheel D…     4   2.3 Regul…    27    19
-##  5 14039 Acura 2.3CL/3.0…  1998 Subcompact C… Manual 5-spd Front-Wheel D…     4   2.3 Regul…    29    21
-##  6 14040 Acura 2.3CL/3.0…  1998 Subcompact C… Automatic 4… Front-Wheel D…     6   3   Regul…    26    17
-##  7 14834 Acura 2.3CL/3.0…  1999 Subcompact C… Automatic 4… Front-Wheel D…     4   2.3 Regul…    27    20
-##  8 14835 Acura 2.3CL/3.0…  1999 Subcompact C… Manual 5-spd Front-Wheel D…     4   2.3 Regul…    29    21
-##  9 14836 Acura 2.3CL/3.0…  1999 Subcompact C… Automatic 4… Front-Wheel D…     6   3   Regul…    26    17
-## 10 11789 Acura 2.5TL       1995 Compact Cars  Automatic 4… Front-Wheel D…     5   2.5 Premi…    23    18
+##       id make  model        year class trans drive   cyl displ fuel    hwy   cty
+##    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1 13309 Acura 2.2CL/3.0CL  1997 Subc… Auto… Fron…     4   2.2 Regu…    26    20
+##  2 13310 Acura 2.2CL/3.0CL  1997 Subc… Manu… Fron…     4   2.2 Regu…    28    22
+##  3 13311 Acura 2.2CL/3.0CL  1997 Subc… Auto… Fron…     6   3   Regu…    26    18
+##  4 14038 Acura 2.3CL/3.0CL  1998 Subc… Auto… Fron…     4   2.3 Regu…    27    19
+##  5 14039 Acura 2.3CL/3.0CL  1998 Subc… Manu… Fron…     4   2.3 Regu…    29    21
+##  6 14040 Acura 2.3CL/3.0CL  1998 Subc… Auto… Fron…     6   3   Regu…    26    17
+##  7 14834 Acura 2.3CL/3.0CL  1999 Subc… Auto… Fron…     4   2.3 Regu…    27    20
+##  8 14835 Acura 2.3CL/3.0CL  1999 Subc… Manu… Fron…     4   2.3 Regu…    29    21
+##  9 14836 Acura 2.3CL/3.0CL  1999 Subc… Auto… Fron…     6   3   Regu…    26    17
+## 10 11789 Acura 2.5TL        1995 Comp… Auto… Fron…     5   2.5 Prem…    23    18
 ## # … with 33,432 more rows
 ```
 
@@ -383,7 +389,7 @@ vehicles %&gt;%
 ```
 
 ```
-## # A tibble: 628 x 3
+## # A tibble: 628 × 3
 ##    make      model             avg_hwy
 ##    &lt;chr&gt;     &lt;chr&gt;               &lt;dbl&gt;
 ##  1 Toyota    Prius                  48
@@ -462,7 +468,10 @@ vehicles %&gt;%
 ---
 class:inverse, center, middle
 
-# Now it's your turn
+# Now it's your turn  
+
+
+
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
@@ -511,6 +520,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable

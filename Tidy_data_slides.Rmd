@@ -1,6 +1,6 @@
 ---
 title: "Chapter 12 Tidy Data"
-subtitle: "MATH 295"
+subtitle: "MATH 265"
 author: "Eric Nordmoe"
 output:
   xaringan::moon_reader:

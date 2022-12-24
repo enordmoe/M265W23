@@ -1,10 +1,9 @@
 ---
 title: "Chapter 22-23 Model Intro and Basics"
-subtitle: "MATH 295"
+subtitle: "MATH 265"
 author: "Eric Nordmoe"
 output:
   xaringan::moon_reader:
-    lib_dir: libs
     css: ["xaringan-themer.css","scrollingbox.css"]
     nature:
       highlightStyle: github

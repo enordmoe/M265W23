@@ -4,7 +4,8 @@
     <title>Chapter 14 Strings</title>
     <meta charset="utf-8" />
     <meta name="author" content="Eric Nordmoe" />
-    <script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+    <script src="libs/header-attrs-2.14/header-attrs.js"></script>
+    <script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
     <link href="libs/str_view-0.1.0/str_view.css" rel="stylesheet" />
     <script src="libs/str_view-binding-1.4.0/str_view.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
@@ -14,9 +15,15 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
+.title[
 # Chapter 14 Strings
-## MATH 295
+]
+.subtitle[
+## MATH 265
+]
+.author[
 ### Eric Nordmoe
+]
 
 ---
 
@@ -53,7 +60,7 @@ Filtering joins:
 # Visualizing Joins in Soccer Data  
 
 
-&lt;img src="figures/soccer_players.png" width="2229" height="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="figures/soccer_players.png" width="1555" height="100%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -130,8 +137,8 @@ states
 ```
 
 ```
-##  [1] "California" "Florida"    "Louisiana"  "Texas"      "Michigan"   "Minnesota" 
-##  [7] "Georgia"    "Arizona"    "Indiana"    "New Jersey"
+##  [1] "California" "Florida"    "Louisiana"  "Texas"      "Michigan"  
+##  [6] "Minnesota"  "Georgia"    "Arizona"    "Indiana"    "New Jersey"
 ```
 
 ---
@@ -166,8 +173,8 @@ str_replace(states, "ana", "X")
 ```
 
 ```
-##  [1] "California" "Florida"    "LouisiX"    "Texas"      "Michigan"   "Minnesota" 
-##  [7] "Georgia"    "Arizona"    "IndiX"      "New Jersey"
+##  [1] "California" "Florida"    "LouisiX"    "Texas"      "Michigan"  
+##  [6] "Minnesota"  "Georgia"    "Arizona"    "IndiX"      "New Jersey"
 ```
 
 ```r
@@ -175,8 +182,8 @@ str_replace_all(states, "i", "X")
 ```
 
 ```
-##  [1] "CalXfornXa" "FlorXda"    "LouXsXana"  "Texas"      "MXchXgan"   "MXnnesota" 
-##  [7] "GeorgXa"    "ArXzona"    "IndXana"    "New Jersey"
+##  [1] "CalXfornXa" "FlorXda"    "LouXsXana"  "Texas"      "MXchXgan"  
+##  [6] "MXnnesota"  "GeorgXa"    "ArXzona"    "IndXana"    "New Jersey"
 ```
 ]
 ---
@@ -259,10 +266,8 @@ str_detect(states, "^[ML]")
 str_view(states, "^[ML]")
 ```
 
-```{=html}
-&lt;div id="htmlwidget-7ed8b97bfdde55735573" style="width:960px;height:100%;" class="str_view html-widget"&gt;&lt;/div&gt;
-&lt;script type="application/json" data-for="htmlwidget-7ed8b97bfdde55735573"&gt;{"x":{"html":"&lt;ul&gt;\n  &lt;li&gt;California&lt;\/li&gt;\n  &lt;li&gt;Florida&lt;\/li&gt;\n  &lt;li&gt;&lt;span class='match'&gt;L&lt;\/span&gt;ouisiana&lt;\/li&gt;\n  &lt;li&gt;Texas&lt;\/li&gt;\n  &lt;li&gt;&lt;span class='match'&gt;M&lt;\/span&gt;ichigan&lt;\/li&gt;\n  &lt;li&gt;&lt;span class='match'&gt;M&lt;\/span&gt;innesota&lt;\/li&gt;\n  &lt;li&gt;Georgia&lt;\/li&gt;\n  &lt;li&gt;Arizona&lt;\/li&gt;\n  &lt;li&gt;Indiana&lt;\/li&gt;\n  &lt;li&gt;New Jersey&lt;\/li&gt;\n&lt;\/ul&gt;"},"evals":[],"jsHooks":[]}&lt;/script&gt;
-```
+<div id="htmlwidget-db7f58f70b291f1f58eb" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-db7f58f70b291f1f58eb">{"x":{"html":"<ul>\n  <li>California<\/li>\n  <li>Florida<\/li>\n  <li><span class='match'>L<\/span>ouisiana<\/li>\n  <li>Texas<\/li>\n  <li><span class='match'>M<\/span>ichigan<\/li>\n  <li><span class='match'>M<\/span>innesota<\/li>\n  <li>Georgia<\/li>\n  <li>Arizona<\/li>\n  <li>Indiana<\/li>\n  <li>New Jersey<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 
 ---
 background-image: url( https://imgs.xkcd.com/comics/backslashes.png)
@@ -327,6 +332,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable
