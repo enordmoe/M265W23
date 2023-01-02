@@ -1,6 +1,6 @@
 ---
 title: "Introduction to R and RMarkdown"
-subtitle: "MATH 265"
+subtitle: "MATH 265 New Try"
 author: "Eric Nordmoe"
 output:
   xaringan::moon_reader:
