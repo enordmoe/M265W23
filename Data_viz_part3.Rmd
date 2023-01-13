@@ -279,5 +279,5 @@ class: inverse
 
 * Carry out a group investigation of the Superheroes data set.   
 
-* The description/template will be provided in the Superheroes Data Viz Minilab project via a GitHub class repository called **superheroes**
+* The description/template is provided in the Superheroes Data Viz Minilab project distributed to you via GitHub repository.
 
