@@ -179,7 +179,7 @@ To show the  proportions (relative frequency) in each interval, try the followin
 
 ```{r, message = FALSE, fig.height = 4}
 ggplot(data = diamonds) + 
-  geom_histogram(aes(x = carat, y = stat(count / sum(count))))
+  geom_histogram(aes(x = carat, y = after_stat(count / sum(count))))
 ```
 
 ---
