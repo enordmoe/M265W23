@@ -1371,23 +1371,17 @@ overflow-y: auto;
 border: 1px solid #ddd;
 border-radius: 4px;
 }
-.tabset-dropdown > .nav-tabs > li.active:before {
-content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+content: "\e259";
 font-family: 'Glyphicons Halflings';
 display: inline-block;
 padding: 10px;
 border-right: 1px solid #ddd;
 }
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-content: "";
-border: none;
-}
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-content: "";
+content: "\e258";
 font-family: 'Glyphicons Halflings';
-display: inline-block;
-padding: 10px;
-border-right: 1px solid #ddd;
+border: none;
 }
 .tabset-dropdown > .nav-tabs > li.active {
 display: block;
@@ -1555,7 +1549,7 @@ variable plots like <code>geom_bar()</code>.</p></li>
 <code>coord_cartesian()</code> to control the appearance of
 plots.</p></li>
 <li><p>Practice on the end of section questions in R4DS. I have a link
-to R4DS solutions near the top of the Moodle page but <a href="https://moodle.kzoo.edu/mod/url/view.php?id=199818">it’s also
+to R4DS solutions near the top of the Moodle page but <a href="https://jrnold.github.io/r4ds-exercise-solutions/">it’s also
 here</a>. These solutions also have some very valuable insights and
 extensions to the text material.</p></li>
 </ol>
@@ -1610,7 +1604,7 @@ able to use when necessary:</p></li>
 <li>Multiple choice: Which code chunk yields this output?<br />
 </li>
 <li>What does this code do?</li>
-<li>Find the error and fix it.<br />
+<li>Find the error and fix it (nothing very obscure).<br />
 </li>
 <li>What goes in the missing spot in the code chunk?<br />
 </li>

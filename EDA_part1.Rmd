@@ -124,7 +124,7 @@ ordered_carnames
 
 ```{r, fig.height = 5}
 ggplot(cardata) + 
-  geom_bar(aes(x = make, y = stat(prop), group = 1)) +
+  geom_bar(aes(x = make, y = after_stat(prop), group = 1)) +
   theme(axis.text.x=element_text(angle=90, hjust=1)) + 
   scale_x_discrete(limits = ordered_carnames) + 
   labs(x = "Car Makes", y = "Proportion of All\n  Models Tested")

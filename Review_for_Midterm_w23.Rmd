@@ -67,7 +67,7 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
 
 7. Use of `coord_flip()` and `coord_cartesian()` to control the appearance of plots.  
 
-8. Practice on the end of section questions in R4DS.  I have a link to R4DS solutions near the top of the Moodle page but [it's also here](https://moodle.kzoo.edu/mod/url/view.php?id=199818). These solutions also have some very valuable insights and extensions to the text material.  
+8. Practice on the end of section questions in R4DS.  I have a link to R4DS solutions near the top of the Moodle page but [it's also here](https://jrnold.github.io/r4ds-exercise-solutions/). These solutions also have some very valuable insights and extensions to the text material.  
 
 
 
@@ -101,7 +101,7 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
 
 1. Multiple choice: Which code chunk yields this output?  
 2. What does this code do?
-2. Find the error and fix it.  
+2. Find the error and fix it (nothing very obscure).  
 3. What goes in the missing spot in the code chunk?  
 4. Write a small code chunk to create the given output.  
 
