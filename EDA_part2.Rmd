@@ -28,7 +28,7 @@ library(fueleconomy)
 
 # Review from Last Time
 
-1. Compare and contrast `geom_histogram()` and `geom_freqpoly()`?
+1. Compare and contrast `geom_histogram()` and `geom_freqpoly()` functions?
 
 --
 
