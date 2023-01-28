@@ -4,7 +4,7 @@
     <title>Exploratory Data Analysis: Part 2</title>
     <meta charset="utf-8" />
     <meta name="author" content="Eric Nordmoe" />
-    <script src="libs/header-attrs-2.14/header-attrs.js"></script>
+    <script src="libs/header-attrs-2.19/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
     <link rel="stylesheet" href="scrollingbox.css" type="text/css" />
   </head>
@@ -137,10 +137,9 @@ class: center, top
 ```r
 library(fueleconomy)
 cardata &lt;- vehicles %&gt;% semi_join(common)
-ggplot(data = cardata, aes(x = year, y = hwy)) +
+ggplot(data = cardata, aes(x = hwy, y = year)) +
   geom_boxplot() + 
-  coord_flip() + 
-  labs(x = "")
+  labs(y = "")
 ```
 
 ![](EDA_part2_files/figure-html/unnamed-chunk-1-1.png)&lt;!-- --&gt;
@@ -151,9 +150,8 @@ ggplot(data = cardata, aes(x = year, y = hwy)) +
 
 
 ```r
-ggplot(data = cardata, aes(x = factor(year), y = hwy, color = factor(year))) +
+ggplot(data = cardata, aes(x = hwy, y = factor(year), color = factor(year))) +
   geom_boxplot() + 
-  coord_flip() + 
   labs(x = "")
 ```
 
@@ -164,9 +162,8 @@ ggplot(data = cardata, aes(x = factor(year), y = hwy, color = factor(year))) +
 
 
 ```r
-ggplot(data = cardata, aes(x =  reorder(factor(year), -hwy, median), y = hwy, color = factor(year))) + 
+ggplot(data = cardata, aes(x = hwy, y =  reorder(factor(year), -hwy, median),  color = factor(year))) + 
   geom_boxplot() + 
-  coord_flip() + 
   labs(x = "")
 ```
 
