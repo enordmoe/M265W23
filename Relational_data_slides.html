@@ -4,7 +4,7 @@
     <title>Chapter 13 Relational Data</title>
     <meta charset="utf-8" />
     <meta name="author" content="Eric Nordmoe" />
-    <script src="libs/header-attrs-2.14/header-attrs.js"></script>
+    <script src="libs/header-attrs-2.19/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
     <link rel="stylesheet" href="scrollingbox.css" type="text/css" />
   </head>
@@ -99,7 +99,7 @@ Consists of 5 tables:
 
 ## From the Data Transformation Cheatsheet  
 
-&lt;img src="figures/overall_combine.png" width="50%" style="display: block; margin: auto;" /&gt;
+&lt;img src="figures/relational_cheatsheet.png" width="50%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -114,6 +114,14 @@ Use a "Mutating Join" to join one table to columns from another
 ---
 
 ## Kinds of Mutating Joins  
+
+* Four ways to join these two tables
+
+&lt;img src="figures/tables_x_and_y.png" width="75%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Kinds of Mutating Joins  (cont'd)
 
 &lt;img src="figures/mutating_joins.png" width="75%" style="display: block; margin: auto;" /&gt;
 
@@ -130,20 +138,6 @@ Use a "Mutating Join" to join one table to columns from another
 
 ---
 
-### Mutating Joins: Inner Join  
-
-* An inner join matches pairs of observations whenever their keys are equal.
-* Code example:  
-
-```r
-inner_join(x, y, by = "key")
-```
-
-&lt;img src="https://www.garrickadenbuie.com/project/tidyexplain/images/inner-join.gif" width="50%" style="display: block; margin: auto;" /&gt;
-
----
-
-
 ## Mutating Joins: Outer Joins
 
 * Outer joins keeps observations that appear in at least one of the tables. 
@@ -151,6 +145,19 @@ inner_join(x, y, by = "key")
 * These joins add  additional "virtual" observations to each table.   
 
 * Missing variable information are filled in with NAs.
+
+---
+
+## Outer Join Examples: Full Join  
+
+* A full join keeps all observations in x and y.
+* Code example:  
+
+```r
+full_join(x, y, by = "key")
+```
+
+&lt;img src="https://www.garrickadenbuie.com/project/tidyexplain/images/full-join.gif" height="50%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -183,18 +190,22 @@ right_join(x, y, by = "key")
 
 ---
 
-## Outer Join Examples: Full Join  
 
-* A full join keeps all observations in x and y.
+### Mutating Joins: Inner Join  
+
+* An inner join matches pairs of observations whenever their keys are equal.
 * Code example:  
 
 ```r
-full_join(x, y, by = "key")
+inner_join(x, y, by = "key")
 ```
 
-&lt;img src="https://www.garrickadenbuie.com/project/tidyexplain/images/full-join.gif" height="50%" style="display: block; margin: auto;" /&gt;
+&lt;img src="https://www.garrickadenbuie.com/project/tidyexplain/images/inner-join.gif" width="50%" style="display: block; margin: auto;" /&gt;
 
 ---
+
+
+
 
 ### The Perils of Duplicate Keys  
 
@@ -202,7 +213,7 @@ full_join(x, y, by = "key")
 
 **Note**: When you join duplicated keys, you get all possible combinations!
 
-`\(\Rightarrow\)`  Remove duplicates with `unique()`
+`\(\Rightarrow\)`  Remove duplicates with `distinct()`
 
 
 ---
@@ -239,7 +250,7 @@ Use a "Filtering Join" to filter one table against the rows of another.
 ## Visualizing Joins in Soccer Data  
 
 
-&lt;img src="figures/soccer_players_join_image.png" width="2283" height="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="figures/soccer_players_join_image.png" width="150%" style="display: block; margin: auto;" /&gt;
 
 
 ---

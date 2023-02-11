@@ -98,7 +98,7 @@ knitr::include_graphics("https://d33wubrfki0l68.cloudfront.net/245292d1ea724f6c3
 ## From the Data Transformation Cheatsheet  
 
 ```{r, out.width = '50%', fig.align='center', fig.cap='',echo=FALSE}
-knitr::include_graphics('figures/overall_combine.png')
+knitr::include_graphics('figures/relational_cheatsheet.png')
 ```
 
 ---
@@ -114,6 +114,16 @@ Use a "Mutating Join" to join one table to columns from another
 ---
 
 ## Kinds of Mutating Joins  
+
+* Four ways to join these two tables
+
+```{r, out.width = '75%', fig.align='center', fig.cap='',echo=FALSE}
+knitr::include_graphics('figures/tables_x_and_y.png')
+```
+
+---
+
+## Kinds of Mutating Joins  (cont'd)
 
 ```{r, out.width = '75%', fig.align='center', fig.cap='',echo=FALSE}
 knitr::include_graphics('figures/mutating_joins.png')
@@ -134,21 +144,6 @@ knitr::include_graphics('https://www.garrickadenbuie.com/project/tidyexplain/ima
 
 ---
 
-### Mutating Joins: Inner Join  
-
-* An inner join matches pairs of observations whenever their keys are equal.
-* Code example:  
-```{r, eval = FALSE}
-inner_join(x, y, by = "key")
-```
-
-```{r, out.width = '50%', fig.align='center', fig.cap='',echo=FALSE}
-knitr::include_graphics('https://www.garrickadenbuie.com/project/tidyexplain/images/inner-join.gif')
-```
-
----
-
-
 ## Mutating Joins: Outer Joins
 
 * Outer joins keeps observations that appear in at least one of the tables. 
@@ -156,6 +151,20 @@ knitr::include_graphics('https://www.garrickadenbuie.com/project/tidyexplain/ima
 * These joins add  additional "virtual" observations to each table.   
 
 * Missing variable information are filled in with NAs.
+
+---
+
+## Outer Join Examples: Full Join  
+
+* A full join keeps all observations in x and y.
+* Code example:  
+```{r, eval = FALSE}
+full_join(x, y, by = "key")
+```
+
+```{r, out.height = '50%', fig.align='center', fig.cap='',echo=FALSE}
+knitr::include_graphics("https://www.garrickadenbuie.com/project/tidyexplain/images/full-join.gif")
+```
 
 ---
 
@@ -190,19 +199,23 @@ knitr::include_graphics("https://www.garrickadenbuie.com/project/tidyexplain/ima
 
 ---
 
-## Outer Join Examples: Full Join  
 
-* A full join keeps all observations in x and y.
+### Mutating Joins: Inner Join  
+
+* An inner join matches pairs of observations whenever their keys are equal.
 * Code example:  
 ```{r, eval = FALSE}
-full_join(x, y, by = "key")
+inner_join(x, y, by = "key")
 ```
 
-```{r, out.height = '50%', fig.align='center', fig.cap='',echo=FALSE}
-knitr::include_graphics("https://www.garrickadenbuie.com/project/tidyexplain/images/full-join.gif")
+```{r, out.width = '50%', fig.align='center', fig.cap='',echo=FALSE}
+knitr::include_graphics('https://www.garrickadenbuie.com/project/tidyexplain/images/inner-join.gif')
 ```
 
 ---
+
+
+
 
 ### The Perils of Duplicate Keys  
 
@@ -212,7 +225,7 @@ knitr::include_graphics('figures/duplicate_keys.png')
 
 **Note**: When you join duplicated keys, you get all possible combinations!
 
-$\Rightarrow$  Remove duplicates with `unique()`
+$\Rightarrow$  Remove duplicates with `distinct()`
 
 
 ---
@@ -255,7 +268,7 @@ knitr::include_graphics('https://www.garrickadenbuie.com/project/tidyexplain/ima
 ## Visualizing Joins in Soccer Data  
 
 
-```{r, out.height = '100%', fig.align='center', fig.cap='',echo=FALSE}
+```{r, out.width = '150%', fig.align='center', fig.cap='',echo=FALSE}
 knitr::include_graphics('figures/soccer_players_join_image.png')
 ```
 
