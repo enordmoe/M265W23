@@ -51,31 +51,13 @@ Filtering joins:
 # Visualizing Joins in Soccer Data  
 
 
-```{r, out.height = '100%', fig.align='center', fig.cap='',echo=FALSE}
-knitr::include_graphics('figures/soccer_players.png')
+```{r, out.width = '150%', fig.align='center', fig.cap='',echo=FALSE}
+knitr::include_graphics('figures/soccer_players_join_image.png')
 ```
 
----
-
-# Questions for Soccer Joins  
-
-Thought experiment: For these two tables, think about what tibble would be produced by each of the 6 joins.  Draw the tible you expect to be produced and answer the following?
-
-1) How many rows and columns?
-
---
-
-2) Which rows are included/excluded?
-
---
-
-3) Are NA values produced by join? Where?
-
---
-
-4) Which columns are included/excluded?
 
 ---
+
 
 # Reflection  
 
@@ -171,7 +153,7 @@ and many more...
 
 Get to know your cheatsheet!  
 
-[Stringr cheatsheet](https://github.com/rstudio/cheatsheets/raw/master/strings.pdf)
+[Stringr cheatsheet](https://posit.co/wp-content/uploads/2022/10/strings-1.pdf)
 
 ```{r, out.width = '60%', fig.align='center', fig.cap='',echo=FALSE}
 knitr::include_graphics('figures/cheat_string_image.png')
