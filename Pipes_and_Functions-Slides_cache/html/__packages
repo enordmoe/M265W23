@@ -11,3 +11,4 @@ lubridate
 xml2
 rvest
 timechange
+knitr

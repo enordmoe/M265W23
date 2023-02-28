@@ -33,3 +33,15 @@
 .small-code .remark-code{
   font-size: 70%
 }
+
+.small-output .remark-inline-code {
+  font-size: 70%
+}
+
+.very-small-code .remark-code{
+  font-size: 50%
+}
+
+.very-small-output .remark-inline-code {
+  font-size: 50%
+}

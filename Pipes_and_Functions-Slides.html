@@ -30,6 +30,7 @@ class: center, middle, inverse, title-slide
 
 
 
+
 # Agenda
 
 * The pipe
@@ -226,6 +227,24 @@ quad_roots(1, -4, 4)  # Gives repeated roots
 ```
 
 ---
+
+## What goes in/What comes out?
+
+* Functions take input(s) defined in the function definition
+
+
+```r
+function([inputs separated by commas]){
+  # what to do with those inputs
+}
+```
+
+* By default they return the last value computed in the function
+
+* You can also define more outputs to be returned in a list as well as nice print methods
+
+
+---
 class: inverse, center, middle
 
 # Functions and Automation: Scotland First Minister's COVID speeches
@@ -299,20 +318,14 @@ background-position: 90% 90%
 
 
 ```r
+# url &lt;- "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-speech-26-october/"
+speech_page &lt;- read_html("https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-speech-26-october/")
 url &lt;- "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-speech-26-october/"
-speech_page &lt;- read_html(url)
 ```
 
 
 ```r
 speech_page
-```
-
-```
-## {html_document}
-## &lt;html dir="ltr" lang="en"&gt;
-## [1] &lt;head&gt;\n&lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8 ...
-## [2] &lt;body&gt;\n    &lt;input type="hidden" id="site-root-path" value="/"&gt;&lt;!-- Googl ...
 ```
 
 ---
@@ -332,6 +345,7 @@ title
 ```
 ## [1] "Coronavirus (COVID-19) update: First Minister's speech 26 October"
 ```
+
 ---
 
 
@@ -598,7 +612,7 @@ scrape_speech &lt;- function(url){
 ```
 
 ---
-## scrape_speech()
+## Define the function scrape_speech()
 
 .small-code[
 
@@ -632,7 +646,30 @@ tibble(
 
 ---
 
-## Function in action
+## Function scrape_speech() in action
+### October 23, 2020
+
+
+```r
+scrape_speech(url = "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-speech-23-october/") %&gt;%
+glimpse()
+```
+
+```
+## Rows: 1
+## Columns: 6
+## $ title    &lt;chr&gt; "Coronavirus (COVID-19) update: First Minister's speech 23 Oc…
+## $ date     &lt;date&gt; 2020-10-23
+## $ location &lt;chr&gt; "St Andrew's House, Edinburgh"
+## $ abstract &lt;chr&gt; "Statement given by First Minister Nicola Sturgeon at a medi…
+## $ text     &lt;list&gt; &lt;"\nGood afternoon everyone. Thank you very much for joining …
+## $ url      &lt;chr&gt; "https://www.gov.scot/publications/coronavirus-covid-19-updat…
+```
+
+---
+
+## Function scrape_speech() in action
+### October 26, 2020
 
 
 ```r
@@ -651,12 +688,237 @@ glimpse()
 ## $ url      &lt;chr&gt; "https://www.gov.scot/publications/coronavirus-covid-19-updat…
 ```
 
+---
+
+## Automation?  
+  
+* We now have a function for scraping speech info given `url`?  
+
+* How can we get a list of speech `url`s?
+  
+---
+
+class:  center, middle
+
+# Inputs
+
+---
+
+## All URLs
+
+
+```r
+all_speeches_page &lt;- read_html("https://www.gov.scot/collections/first-ministers-speeches/")
+all_speeches_page %&gt;%
+  html_nodes(".collections-list a") %&gt;%
+  html_attr("href") 
+```
+
+```
+##   [1] "/publications/business-parliament-conference-first-ministers-speech-3-february-2023/"                        
+##   [2] "/publications/first-ministers-speech-scottish-renewables-offshore-wind-conference-wednesday-25-january-2023/"
+##   [3] "/publications/update-pressures-facing-nhs-first-ministers-speech-monday-16-january/"                         
+##   [4] "/publications/pressures-facing-nhs-first-ministers-speech-monday-9-january/"                                 
+##   [5] "/publications/thecityuk-annual-conference-first-ministers-speech-1-december-2022/"                           
+##   [6] "/publications/poverty-alliance-30th-anniversary-conference-first-ministers-speech-25-november-2022/"         
+##   [7] "/publications/cop27-loss-damage-panel-first-ministers-speech-8-november-2022/"                               
+##   [8] "/publications/first-minister-opens-scottish-government-conference-loss-damage/"                              
+##   [9] "/publications/motion-condolence/"                                                                            
+##  [10] "/publications/tribute-majesty-queen/"                                                                        
+...
+```
 
 
 ---
-# Your turn
 
-### Can you create a similar function to access information on the Top Rated TV Shows on IMDB (there should be 250 on the list)?
+## COVID-19 URLs fragments
+
+
+```r
+all_speeches_page &lt;- read_html("https://www.gov.scot/collections/first-ministers-speeches/")
+all_speeches_page %&gt;%
+  html_nodes(".collections-list a") %&gt;%
+  html_attr("href") %&gt;%
+  str_subset("covid-19")
+```
+
+```
+##   [1] "/publications/coronavirus-covid-19-update-first-ministers-speech-tuesday-22-february-2022/"     
+##   [2] "/publications/coronavirus-covid-19-update-first-ministers-statement-8-february-2022/"           
+##   [3] "/publications/coronavirus-covid-19-update-first-ministers-statement-1-february-2022/"           
+##   [4] "/publications/coronavirus-covid-19-update-first-ministers-statement-25-january-2022/"           
+##   [5] "/publications/coronavirus-covid-19-update-first-ministers-statement-18-january-2022/"           
+##   [6] "/publications/coronavirus-covid-19-update-first-ministers-statement-11-january-2022/"           
+##   [7] "/publications/coronavirus-covid-19-update-first-ministers-statement-5-january-2022/"            
+##   [8] "/publications/coronavirus-covid-19-update-first-ministers-statement-21-december-2021/"          
+##   [9] "/publications/coronavirus-covid-19-update-first-ministers-speech-17-december-2021/"             
+##  [10] "/publications/coronavirus-covid-19-update-first-ministers-statement-14-december-2021/"          
+...
+```
+
+---
+## Combine to get COVID-19 URLs
+
+
+```r
+all_speeches_page &lt;- read_html("https://www.gov.scot/collections/first-ministers-speeches/")
+all_speeches_page %&gt;%
+  html_nodes(".collections-list a") %&gt;%
+  html_attr("href") %&gt;%
+  str_subset("covid-19")%&gt;%
+  str_c("https://www.gov.scot", .)
+```
+
+```
+##   [1] "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-speech-tuesday-22-february-2022/"     
+##   [2] "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-statement-8-february-2022/"           
+##   [3] "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-statement-1-february-2022/"           
+##   [4] "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-statement-25-january-2022/"           
+##   [5] "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-statement-18-january-2022/"           
+##   [6] "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-statement-11-january-2022/"           
+##   [7] "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-statement-5-january-2022/"            
+##   [8] "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-statement-21-december-2021/"          
+##   [9] "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-speech-17-december-2021/"             
+##  [10] "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-statement-14-december-2021/"          
+...
+```
+
+---
+
+## Save COVID-19 URLs
+
+
+```r
+covid_speech_urls &lt;- all_speeches_page %&gt;%
+  html_nodes(".collections-list a") %&gt;%
+  html_attr("href") %&gt;%
+  str_subset("covid-19") %&gt;%
+  str_c("https://www.gov.scot", .)
+covid_speech_urls
+```
+
+```
+##   [1] "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-speech-tuesday-22-february-2022/"     
+##   [2] "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-statement-8-february-2022/"           
+##   [3] "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-statement-1-february-2022/"           
+##   [4] "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-statement-25-january-2022/"           
+##   [5] "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-statement-18-january-2022/"           
+##   [6] "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-statement-11-january-2022/"           
+##   [7] "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-statement-5-january-2022/"            
+##   [8] "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-statement-21-december-2021/"          
+##   [9] "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-speech-17-december-2021/"             
+##  [10] "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-statement-14-december-2021/"          
+...
+```
+
+---
+
+class:  center, middle
+
+# Iteration
+
+---
+
+## Define the task
+
+* Goal: Scrape info on all COVID-19 speeches of the First Minister
+* So far:
+.very-small-code[
+
+```r
+scrape_speech(covid_speech_urls[1])
+```
+
+```
+## # A tibble: 1 × 6
+##   title                                   date       locat…¹ abstr…² text  url  
+##   &lt;chr&gt;                                   &lt;date&gt;     &lt;chr&gt;   &lt;chr&gt;   &lt;lis&gt; &lt;chr&gt;
+## 1 Coronavirus (COVID-19) update: First M… 2022-02-22 Scotti… Statem… &lt;chr&gt; http…
+## # … with abbreviated variable names ¹​location, ²​abstract
+```
+
+
+```r
+scrape_speech(covid_speech_urls[2])
+```
+
+```
+## # A tibble: 1 × 6
+##   title                                   date       locat…¹ abstr…² text  url  
+##   &lt;chr&gt;                                   &lt;date&gt;     &lt;chr&gt;   &lt;chr&gt;   &lt;lis&gt; &lt;chr&gt;
+## 1 Coronavirus (COVID-19) update: First M… 2022-02-08 Scotti… Statem… &lt;chr&gt; http…
+## # … with abbreviated variable names ¹​location, ²​abstract
+```
+
+
+```r
+scrape_speech(covid_speech_urls[3])
+```
+
+```
+## # A tibble: 1 × 6
+##   title                                   date       locat…¹ abstr…² text  url  
+##   &lt;chr&gt;                                   &lt;date&gt;     &lt;chr&gt;   &lt;chr&gt;   &lt;lis&gt; &lt;chr&gt;
+## 1 Coronavirus (COVID-19) update: First M… 2022-02-01 Scotti… Statem… &lt;chr&gt; http…
+## # … with abbreviated variable names ¹​location, ²​abstract
+```
+]
+
+---
+
+## Now what?
+
+* What else do we need to do?
+  + Run the `scrape_speech()` function on all COVID-19 speech links
+  + Combine the resulting data frames from each run into one giant data frame
+
+---
+
+## Iteration
+
+* How can we tell R to apply the `scrape_speech()` function to each link in `covid_speech_urls`?
+
+---
+class: inverse, center, top
+
+background-image: url(figures/purrr.png)
+background-position: 50% 75%
+background-size: 50% 50%
+
+## We have the `purrr`fect solution! 
+
+---
+## Go to each page, scrape speech info 
+
+* Map the `scrape_speech()` function
+* to each element of `covid_speech_urls`
+* and return a data frame by binding rows together
+
+In other words, we want to **map** the `scrape_speech()` function to each element of `covid_speech_urls`:
+
+
+```r
+covid_speeches &lt;- map_df(covid_speech_urls, scrape_speech)
+head(covid_speeches)
+```
+
+
+---
+
+## Caution  
+
+* If you get `HTTP Error 429 (Too many requests)` you might want to slow down your hits.
+
+* You can add a `Sys.sleep()` call to slow down your function:
+
+
+```r
+scrape_speech() &lt;- function(x){
+* Sys.sleep(runif(1))
+  ...
+
+}
+```
 
 
 .footnote[**IMPORTANT NOTE**: This exercise is intended to illustrate methods for using functions to obtain data from the web. For large scale automated processes, be sure to obtain permission from the web site you wish to scrape.]
