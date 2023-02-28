@@ -209,6 +209,23 @@ quad_roots(1, -4, 4)  # Gives repeated roots
 ```
 
 ---
+
+## What goes in/What comes out?
+
+* Functions take input(s) defined in the function definition
+
+```{r, eval = FALSE}
+function([inputs separated by commas]){
+  # what to do with those inputs
+}
+```
+
+* By default they return the last value computed in the function
+
+* You can also define more outputs to be returned in a list as well as nice print methods
+
+
+---
 class: inverse, center, middle
 
 # Functions and Automation: Scotland First Minister's COVID speeches
@@ -280,7 +297,7 @@ background-position: 90% 90%
 
 ## Read page for  October 26, 2020 speech
 
-```{r}
+```{r, read-page}
 url <- "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-speech-26-october/"
 speech_page <- read_html(url)
 ```
@@ -295,12 +312,13 @@ speech_page
 
 Use Selector Gadget to find the appropriate node
 
-```{r}
+```{r read-title}
 title <- speech_page %>%
     html_node(".ds_page-header__title") %>%
     html_text()
 title
 ```
+
 ---
 
 
@@ -308,7 +326,7 @@ title
 
 * Use `dmy()` to format
 
-```{r}
+```{r read-date}
 library(lubridate)
 date <- speech_page %>%
     html_node("#sg-meta__publication-date") %>%
@@ -376,12 +394,327 @@ oct_26_speech <- tibble(
 oct_26_speech
 ```
 
+---
+
+## Read page for October 23, 2020 speech
+
+```{r}
+url <- "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-speech-23-october/"
+speech_page <- read_html(url)
+```
+
+```{r}
+speech_page
+```
+
+---
+
+## Extract components of the October 23, 2020 speech
+
+```{r}
+title <- speech_page %>%
+  html_node(".ds_page-header__title") %>%
+  html_text()
+date <- speech_page %>%
+  html_node("#sg-meta__publication-date") %>%
+  html_text() %>%
+  dmy()
+location <- speech_page %>%
+  html_node(".ds_metadata__item:nth-child(5) strong") %>%
+  html_text()
+abstract <- speech_page %>%
+  html_node(".ds_no-margin--bottom") %>%
+  html_text()
+text <- speech_page %>%
+  html_nodes("#preamble p") %>%
+  html_text() %>%
+  list()
+```
+
+---
+
+## Put it all in a data frame
+
+```{r}
+oct_23_speech <- tibble(
+  title    = title,
+  date     = date,
+  location = location,
+  abstract = abstract,
+  text     = text,
+  url      = url
+)
+oct_23_speech
+```
 
 
 ---
-# Your turn
+class: inverse, center, middle
 
-### Can you create a similar function to access information on the Top Rated TV Shows on IMDB (there should be 250 on the list)?
+# Isn't there a way to speed this up?
+
+---
+class:  center, middle
+
+# Functions to the Rescue
+
+---
+
+## When should you write a function?
+
+* When you’ve copied and pasted a block of code more than twice.
+
+---
+
+### How many times would we need to copy and paste the code we developed to scrape data on all of First Minister's COVID-19 speeches?
+
+![:scale 50%](figs/fm_speeches_p3.png)
+
+---
+
+## Why functions?
+  
+Automate common tasks in a more powerful and general way than copy-and-pasting:  
+  
+* Use names that indicate what the purpose of the function
+   + Avoid reserved R names: like `c`, `sum`
+
+* Make updating code easier allowing you to update in just one place instead of many
+
+* Eliminate mistakes with copying and pasting
+   + Forgetting to make corresponding changes in all places
+
+* Learn to write and share your own functions!
+
+---
+
+### Assuming that the page structure is the same for each speech page, how many "things" do you need to know for each speech page to scrape the data we want from it?
+
+.small-code[
+```{r, eval = FALSE}
+url <- "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-speech-23-october/"
+speech_page <- read_html(url)
+title <- speech_page %>%
+  html_node(".ds_page-header__title") %>%
+  html_text()
+date <- speech_page %>%
+  html_node("#sg-meta__publication-date") %>%
+  html_text() %>%
+  dmy()
+location <- speech_page %>%
+  html_node(".ds_metadata__item:nth-child(5) strong") %>%
+  html_text()
+abstract <- speech_page %>%
+  html_node(".ds_no-margin--bottom") %>%
+  html_text()
+text <- speech_page %>%
+  html_nodes("#preamble p") %>%
+  html_text() %>%
+  list()
+tibble(title = title, date  = date, location = location,  
+       abstract = abstract, text = text,  url = url)
+```
+]
+
+---
+
+## Turn your code into a function
+
+* Pick a short informative name, preferably a verb.
+
+* List inputs, or **arguments**, to the function inside `function`. If we had more the call would look like `function(x, y, z)`.
+
+* Place the code you have developed in body of the function, a `{` block that immediately follows `function(...)`.
+
+```{r, eval = FALSE}
+scrape_speech <- function(url){
+  # code we developed earlier to scrape info 
+  # on a single speech goes here
+}
+```
+
+---
+## Define the function scrape_speech()
+
+.small-code[
+```{r}
+scrape_speech <- function(url) {
+  speech_page <- read_html(url)
+  title <- speech_page %>%
+  html_node(".ds_page-header__title") %>%
+  html_text()
+date <- speech_page %>%
+  html_node("#sg-meta__publication-date") %>%
+  html_text() %>%
+  dmy()
+location <- speech_page %>%
+  html_node(".ds_metadata__item:nth-child(5) strong") %>%
+  html_text()
+abstract <- speech_page %>%
+  html_node(".ds_no-margin--bottom") %>%
+  html_text()
+text <- speech_page %>%
+  html_nodes("#preamble p") %>%
+  html_text() %>%
+  list()
+tibble(
+  title = title, date = date, location = location,
+  abstract = abstract, text = text, url = url
+)
+}
+```
+]
+
+---
+
+## Function scrape_speech() in action
+### October 23, 2020
+
+```{r}
+scrape_speech(url = "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-speech-23-october/") %>%
+glimpse()
+```
+
+---
+
+## Function scrape_speech() in action
+### October 26, 2020
+
+```{r}
+scrape_speech(url = "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-speech-26-october/") %>%
+glimpse()
+```
+
+---
+
+## Automation?  
+  
+* We now have a function for scraping speech info given `url`?  
+
+* How can we get a list of speech `url`s?
+  
+---
+
+class:  center, middle
+
+# Inputs
+
+---
+
+## All URLs
+
+```{r}
+all_speeches_page <- read_html("https://www.gov.scot/collections/first-ministers-speeches/")
+all_speeches_page %>%
+  html_nodes(".collections-list a") %>%
+  html_attr("href") 
+```
+
+
+---
+
+## COVID-19 URLs fragments
+
+```{r}
+all_speeches_page <- read_html("https://www.gov.scot/collections/first-ministers-speeches/")
+all_speeches_page %>%
+  html_nodes(".collections-list a") %>%
+  html_attr("href") %>%
+  str_subset("covid-19")
+```
+
+---
+## Combine to get COVID-19 URLs
+
+```{r}
+all_speeches_page <- read_html("https://www.gov.scot/collections/first-ministers-speeches/")
+all_speeches_page %>%
+  html_nodes(".collections-list a") %>%
+  html_attr("href") %>%
+  str_subset("covid-19")%>%
+  str_c("https://www.gov.scot", .)
+```
+
+---
+
+## Save COVID-19 URLs
+
+```{r}
+covid_speech_urls <- all_speeches_page %>%
+  html_nodes(".collections-list a") %>%
+  html_attr("href") %>%
+  str_subset("covid-19") %>%
+  str_c("https://www.gov.scot", .)
+covid_speech_urls
+```
+
+---
+
+class:  center, middle
+
+# Iteration
+
+---
+
+## Define the task
+
+* Goal: Scrape info on all COVID-19 speeches of the First Minister
+* So far:
+```{r}
+scrape_speech(covid_speech_urls[1])
+scrape_speech(covid_speech_urls[2])
+scrape_speech(covid_speech_urls[3])
+```
+
+* What else do we need to do?
+  + Run the `scrape_speech()` function on all COVID-19 speech links
+  + Combine the resulting data frames from each run into one giant data frame
+
+---
+
+## Iteration
+
+* How can we tell R to apply the `scrape_speech()` function to each link in `covid_speech_urls`?
+
+---
+class: inverse, center, top
+
+background-image: url(figures/purrr.png)
+background-position: 50% 75%
+background-size: 50% 50%
+
+## We have the `purrr`fect solution! 
+
+---
+## Go to each page, scrape speech info 
+
+* Map the `scrape_speech()` function
+* to each element of `covid_speech_urls`
+* and return a data frame by binding rows together
+
+In other words, we want to **map** the `scrape_speech()` function to each element of `covid_speech_urls`:
+
+```{r eval=FALSE}
+covid_speeches <- map_df(covid_speech_urls, scrape_speech)
+head(covid_speeches)
+```
+
+
+---
+
+## Caution  
+
+* If you get `HTTP Error 429 (Too many requests)` you might want to slow down your hits.
+
+* You can add a `Sys.sleep()` call to slow down your function:
+
+```{r eval=FALSE}
+scrape_speech() <- function(x){
+  Sys.sleep(runif(1))  #<<
+  ...
+
+}
+```
 
 
 .footnote[**IMPORTANT NOTE**: This exercise is intended to illustrate methods for using functions to obtain data from the web. For large scale automated processes, be sure to obtain permission from the web site you wish to scrape.]

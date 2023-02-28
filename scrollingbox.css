@@ -30,3 +30,6 @@
   height: 90%;
   overflow-y: scroll;
 }
+.small-code .remark-code{
+  font-size: 70%
+}
