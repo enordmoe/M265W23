@@ -4,7 +4,7 @@
     <title>Chapters 18 and 19: Pipes and Functions</title>
     <meta charset="utf-8" />
     <meta name="author" content="Eric Nordmoe" />
-    <script src="libs/header-attrs-2.14/header-attrs.js"></script>
+    <script src="libs/header-attrs-2.19/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
     <link rel="stylesheet" href="scrollingbox.css" type="text/css" />
   </head>
@@ -228,27 +228,99 @@ quad_roots(1, -4, 4)  # Gives repeated roots
 ---
 class: inverse, center, middle
 
-# Functions and Automation  
+# Functions and Automation: Scotland First Minister's COVID speeches
 
 ---
-## A Quick Exercise: Popular TV shows
 
-RStudio Cloud `\(\rightarrow\)` Web scraping + automation
 
-1. Scrape the list of most popular TV shows on IMDB: http://www.imdb.com/chart/tvmeter  
+## Goal
 
-2. Click through on each of the *first three* (or however many you can get through) tv show detail pages to also obtain genres and runtime.  
+Use to scrape all the first minister's speeches that contain COVID in the title and create a dataset of speeches containing the following information about the speeches:
 
-3. Time permitting, also try to get the following:  
-    + Number of episodes so far  
-    + Certificate (PG, PG-13, etc.)  
-    + First five plot keywords  
-    + Country  
-    + Language
-  
-4. Add this information to the data frame you created in step 1 and tidy up.  
+1. Title
+
+2. Date
+
+3. Location
+
+4. Abstract
+
+5. Text of the speech
+
+6. URL address of the speech
 
 ---
+
+## Website Table of Contents 
+
+![](figs/first_min_contents.png)
+
+---
+
+## The Goal
+
+![](figs/first_min_speeches_df.png)
+
+---
+
+## Getting Oriented
+
+#### [https://www.gov.scot/collections/first-ministers-speeches/](https://www.gov.scot/collections/first-ministers-speeches/)
+
+
+![](figs/fm_speeches_p1.png)
+---
+
+![:scale 80%](figs/fm_speeches_p2.png)
+
+
+---
+## Plan
+
+1. Scrape `title`, `date`, `location`, `abstract`, and `text` from a few COVID-19 speech pages to develop the code
+
+2. Write a function that scrapes `title`, `date`, `location`, `abstract`, and `text` from COVID-19 speech pages
+
+3. Scrape the `url`s of COVID-19 speeches from the main page
+
+4. Use this function to scrape from each individual COVID-19 speech from these `url`s and create a data frame with the columns `title`, `date`, `location`, `abstract`, `text`, and `url`
+
+---
+class:  middle
+
+## 1. Scrape data from a few COVID-19 speech pages
+
+---
+background-image: url("figs/fm_speeches_picture_oct20.png")
+background-size: 25%
+background-position: 90% 90%
+
+## Read page for  October 26, 2020 speech
+
+
+```r
+url &lt;- "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-speech-26-october/"
+speech_page &lt;- read_html(url)
+```
+
+
+```r
+speech_page
+```
+
+```
+## {html_document}
+## &lt;html dir="ltr" lang="en"&gt;
+## [1] &lt;head&gt;\n&lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8 ...
+## [2] &lt;body&gt;\n    &lt;input type="hidden" id="site-root-path" value="/"&gt;&lt;!-- Googl ...
+```
+
+
+
+
+---
+
+
 class: inverse, center, middle
 
 # Functions to the Rescue
@@ -642,12 +714,12 @@ head(urls)
 ```
 
 ```
-## [1] "http://www.imdb.com/title/tt13443470"
-## [2] "http://www.imdb.com/title/tt13406094"
-## [3] "http://www.imdb.com/title/tt4236770" 
-## [4] "http://www.imdb.com/title/tt10278918"
-## [5] "http://www.imdb.com/title/tt9319668" 
-## [6] "http://www.imdb.com/title/tt16358384"
+## [1] "http://www.imdb.com/title/tt3581920" 
+## [2] "http://www.imdb.com/title/tt7335184" 
+## [3] "http://www.imdb.com/title/tt10293938"
+## [4] "http://www.imdb.com/title/tt18335752"
+## [5] "http://www.imdb.com/title/tt14269590"
+## [6] "http://www.imdb.com/title/tt4236770"
 ```
 ]
 
