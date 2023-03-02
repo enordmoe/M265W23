@@ -394,7 +394,7 @@ abstract
 
 ```{r}
 text <- speech_page %>%
-    html_node("#preamble p") %>%
+    html_nodes("#preamble p") %>%
     html_text() %>%
   list()
 text
