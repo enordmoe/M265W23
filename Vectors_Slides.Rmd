@@ -1,5 +1,5 @@
 ---
-title: "Chapter 20 Vectors"
+title: "Chapter 20 Vectors and Recursive Vectors"
 subtitle: "MATH 265"
 author: "Eric Nordmoe"
 output:
@@ -22,6 +22,7 @@ knitr::opts_chunk$set(echo = TRUE,message=FALSE,warning=FALSE, cache = TRUE)
 ```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyverse)
 library(rvest)
+library(purrr)
 ```
 
 
@@ -40,130 +41,24 @@ library(rvest)
 
 ---
 
-## Function Review: Question 1  
+## Function Review
 
-Q: What belongs in the blank?   
+1. When to write a function?
 
-A: (a) `from`, (b) `of`, (c) `in`, or (d) `%in%`  
+--
 
-<!-- Answer is "in" -->
+2. Components of writing a function?
 
-```{r, eval = FALSE}
-sales <- list(
-    jan = c(9, 2, 10), 
-    feb = c(19, 13, 11))
+--
 
-x <- vector("double", 2)
-for (i ____ seq_along(sales)) { #<<
-    x[i] <- mean(sales[[i]])
-}
-x
-```
+3. How to name a function?
 
-Output:  
-```
-[1]  7.00000 14.33333
-```
+--
 
----
-## Function Review: Question 2 
-
-Q: Complete the code to produce the output   
-
-A: (a) `for` (b) `do` (c) `with` (d) `foreach`  
-
-<!-- Answer is "for" -->
-```{r, eval = FALSE}
-x <- c(13, 12, 14, 15)
-
----- (i in x) { #<<
-    if(i %% 2 == 0) {
-        print(paste(i, "is an even number"))
-    } else {
-        print(paste(i, "is an odd number"))
-    }
-}
-```
-
-Output:  
-
-```
-[1] "13 is an odd number"
-[1] "12 is an even number"
-[1] "14 is an even number"
-[1] "15 is an odd number"
-```
----
-## Function Review: Question 3
-
-Q: Complete the code to produce the output  
-
-A: (a) `ifelse` (b) `if` (c) `when`
-
-<!-- Answer is "if" -->
-
-```{r, eval = FALSE}
-score <- 94
-_____ (score > 60) { #<<
-    print("Above 60!")
-} else {
-    print("At or below 60!")
-}
-```
-
-Output:  
-
-```
-[1] "pass!"
-```
+4. How to iterate a function?
 
 ---
 
-## Function Review: Question 4 
-
-Q: Complete the code to produce the output  
-
-A: (a) `when` (b) `if` (c) `ifelse`
-
-<!-- Answer is "if" -->
-```{r, eval = FALSE}
-day <- "sat"
-____ (day == "sat") { #<<
-    print("It is Saturday!")
-}
-```
-
-Output:  
-
-```
-[1] "It is Saturday!"
-```
-
----
-
-## Function Review: Question 5
-
-What will be the output?
-
-<!-- Answer: c(3,3) -->
-
-```{r, eval = FALSE}
-x <- 2
-
-add <- function() {
-    x + 1
-}
-
-x1 <- add()
-x2 <- add()
-
-c(x1, x2)
-```
-
-Output: (a) `c(3, 4)` (b) `c(3, 3)` (c) `c(2, 3)` (d) An error
-
-
----
 
 ##  Vectors  
 
@@ -320,7 +215,6 @@ mean(y) # what proportion are greater than 0.5?
 typeof(c(TRUE, 1L))
 typeof(c(1L, 1.5))
 typeof(c(1.5, "a"))
-is_numeric(typeof(c(1.5, "a"))) 
 is_double(typeof(c(1.5, "a")))
 is_integer(typeof(c(1.5, "a")))
 is_character(typeof(c(1.5, "a")))

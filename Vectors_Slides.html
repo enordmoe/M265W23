@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Chapter 20 Vectors</title>
+    <title>Chapter 20 Vectors and Recursive Vectors</title>
     <meta charset="utf-8" />
     <meta name="author" content="Eric Nordmoe" />
-    <script src="libs/header-attrs-2.14/header-attrs.js"></script>
+    <script src="libs/header-attrs-2.19/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
     <link rel="stylesheet" href="scrollingbox.css" type="text/css" />
   </head>
@@ -13,7 +13,7 @@
 class: center, middle, inverse, title-slide
 
 .title[
-# Chapter 20 Vectors
+# Chapter 20 Vectors and Recursive Vectors
 ]
 .subtitle[
 ## MATH 265
@@ -45,135 +45,24 @@ class: center, middle, inverse, title-slide
 
 ---
 
-## Function Review: Question 1  
+## Function Review
 
-Q: What belongs in the blank?   
+1. When to write a function?
 
-A: (a) `from`, (b) `of`, (c) `in`, or (d) `%in%`  
+--
 
-&lt;!-- Answer is "in" --&gt;
+2. Components of writing a function?
 
+--
 
-```r
-sales &lt;- list(
-    jan = c(9, 2, 10), 
-    feb = c(19, 13, 11))
+3. How to name a function?
 
-x &lt;- vector("double", 2)
-*for (i ____ seq_along(sales)) {
-    x[i] &lt;- mean(sales[[i]])
-}
-x
-```
+--
 
-Output:  
-```
-[1]  7.00000 14.33333
-```
-
----
-## Function Review: Question 2 
-
-Q: Complete the code to produce the output   
-
-A: (a) `for` (b) `do` (c) `with` (d) `foreach`  
-
-&lt;!-- Answer is "for" --&gt;
-
-```r
-x &lt;- c(13, 12, 14, 15)
-
-*---- (i in x) {
-    if(i %% 2 == 0) {
-        print(paste(i, "is an even number"))
-    } else {
-        print(paste(i, "is an odd number"))
-    }
-}
-```
-
-Output:  
-
-```
-[1] "13 is an odd number"
-[1] "12 is an even number"
-[1] "14 is an even number"
-[1] "15 is an odd number"
-```
----
-## Function Review: Question 3
-
-Q: Complete the code to produce the output  
-
-A: (a) `ifelse` (b) `if` (c) `when`
-
-&lt;!-- Answer is "if" --&gt;
-
-
-```r
-score &lt;- 94
-*_____ (score &gt; 60) {
-    print("Above 60!")
-} else {
-    print("At or below 60!")
-}
-```
-
-Output:  
-
-```
-[1] "pass!"
-```
+4. How to iterate a function?
 
 ---
 
-## Function Review: Question 4 
-
-Q: Complete the code to produce the output  
-
-A: (a) `when` (b) `if` (c) `ifelse`
-
-&lt;!-- Answer is "if" --&gt;
-
-```r
-day &lt;- "sat"
-*____ (day == "sat") {
-    print("It is Saturday!")
-}
-```
-
-Output:  
-
-```
-[1] "It is Saturday!"
-```
-
----
-
-## Function Review: Question 5
-
-What will be the output?
-
-&lt;!-- Answer: c(3,3) --&gt;
-
-
-```r
-x &lt;- 2
-
-add &lt;- function() {
-    x + 1
-}
-
-x1 &lt;- add()
-x2 &lt;- add()
-
-c(x1, x2)
-```
-
-Output: (a) `c(3, 4)` (b) `c(3, 3)` (c) `c(2, 3)` (d) An error
-
-
----
 
 ##  Vectors  
 
@@ -333,7 +222,6 @@ mean(y) # what proportion are greater than 0.5?
 typeof(c(TRUE, 1L))
 typeof(c(1L, 1.5))
 typeof(c(1.5, "a"))
-is_numeric(typeof(c(1.5, "a"))) 
 is_double(typeof(c(1.5, "a")))
 is_integer(typeof(c(1.5, "a")))
 is_character(typeof(c(1.5, "a")))
