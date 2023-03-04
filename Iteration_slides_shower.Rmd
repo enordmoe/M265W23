@@ -163,7 +163,7 @@ map_int(df, mean)
 * Uses `map_df` to create a data frame by binding rows
 
 ```{r, eval = FALSE}
-map_df(urls, scrape_show_info)
+map_df(covid_speech_urls, scrape_speech)
 ```
 
 
@@ -190,7 +190,7 @@ pmap(list(mean = mu, sd = sigma, n = n), rnorm)
 ## Study the purrr Cheat Sheet
 <img src="figures/cat.jpeg" class="cover">
 <p style="margin-top:11cm;">
-https://github.com/rstudio/cheatsheets/raw/master/purrr.pdf
+https://posit.co/wp-content/uploads/2022/10/purrr.pdf
 </p>
 
 ## Advanced functional programming!  
@@ -199,7 +199,10 @@ https://github.com/rstudio/cheatsheets/raw/master/purrr.pdf
 fun <- function(f) pmap(list(x = mtcars, na.rm = TRUE), f)
 param <- list(list(mean), list(median), list(sd))
 
+#was
 invoke_map(.f = fun, .x = param)
+#now
+map(param, fun)
 ```
 1. At the `invoke_map()` level, `fun` takes as arguments `param`, which are the functions we want to apply to `mtcars`.
 2. Next, at the `fun` level, these functions stored in `param` are applied by `pmap()`, one at a time, to each column in `mtcars`.
